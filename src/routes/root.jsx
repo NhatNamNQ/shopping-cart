@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 
 
-function RootLayout() {
+function Root() {
   const [count, setCount] = useState(0)
 
   return (
@@ -15,4 +13,4 @@ function RootLayout() {
   )
 }
 
-export default RootLayout;
+export default Root;
