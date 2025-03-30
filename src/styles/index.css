@@ -1,3 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo');
 @import "tailwindcss";
 
+.search-container {
+    margin: auto;
+}
+
+.search {
+    width: 50vh;
+    height: 30px;
+    max-width: 400px;
+    min-width: 100px;
+    @apply outline-none rounded-lg
+}
