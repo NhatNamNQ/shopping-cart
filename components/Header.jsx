@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom"
 export function Header() {
     return (
         <header className="border-b border-gray-200">
-            <div className="container flex items-center max-w-screen justify-between py-4">
+            <div className="container flex items-center max-w-screen justify-between p-4">
                 <div>
                     <img src="logo.svg" alt="logo" width={50} />
                 </div>
                 <ul className="flex gap-x-16 font-medium item-center">
                     <NavLink to="/">Home</NavLink>
-                    <NavLink to="shop">Shop</NavLink>
+                    <NavLink to="cards">Cards</NavLink>
                     <NavLink to="about">About</NavLink>
                     <NavLink to="contact">Contact</NavLink>
 
