@@ -32,10 +32,25 @@ export default function Cards() {
                     {cards &&
                         cards.map(card => (
                             <li key={card.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl ">
-                                <div className="relative group">
-                                    <img src={card.images.small} alt={card.name} className="w-full h-auto"/>
+                                <div className="relative aspect-[3/4]">
+                                    <img src={card.images.small} alt={card.name} className="absolute inset-0 w-full h-full object-contain" />
                                 </div>
-                                <h3>{card.name}</h3>
+
+                                {/* Card Info */}
+                                <div className="px-2">
+                                    <h3 className="text-xl font-bold mb-2 truncate mt-2">
+                                        {card.name}
+                                    </h3>
+                                    <p className="font-medium">
+                                        {card.cardmarket.prices.averageSellPrice}
+                                    </p>
+
+                                    {/* Add to Cart Button */}
+                                    <button className="mt-4 mb-4 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                                        Add to Card
+                                    </button>
+
+                                </div>
                             </li>
                         ))}
                 </ul>
