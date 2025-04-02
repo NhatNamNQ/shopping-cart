@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getCards, getSets } from "../../api";
-import Loader from "../../../components/Loader";
+import Loader from "../../components/Loader";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import CardsList from "./CardsList";
