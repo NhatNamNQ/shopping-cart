@@ -1,4 +1,4 @@
-import { fetchData } from "./src/ultils";
+import { fetchData } from "./ultils";
 
 const API_URL = 'https://api.pokemontcg.io/v2';
 
