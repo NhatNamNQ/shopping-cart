@@ -21,6 +21,10 @@ const routes = createBrowserRouter([
       {
         path: 'cards',
         element: <Cards />
+      },
+      {
+        path: 'cards/series/:seriesQuery',
+        element: <Cards />
       }
     ]
   }

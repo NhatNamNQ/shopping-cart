@@ -1,16 +1,20 @@
+import { fetchData } from "./src/ultils";
+
 const API_URL = 'https://api.pokemontcg.io/v2';
 
 export const getCards = async () => {
     try {
-        const response = await fetch(`${API_URL}/cards?pageSize=50`);
+        const res = await fetchData(`${API_URL}/cards?pageSize=50`);
+        return res.data
+    } catch (error) {
+        console.error('Error fetching cards:', error);
+    }
+}
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch cards');
-        }
-
-        const data = await response.json();
-
-        return data.data
+export const getSets = async () => {
+    try {
+        const res = await fetchData(`https://api.pokemontcg.io/v2/sets/`);
+        return res.data;
     } catch (error) {
         console.error('Error fetching cards:', error);
     }
