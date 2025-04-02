@@ -51,16 +51,25 @@ export default function Cards() {
                 <Loader />
             )}
 
+
             {!loading && (
                 <div className="container mx-auto py-8">
 
                     <div className="flex justify-center">
                         <h1 className="text-4xl pb-2 font-bold mx-auto mb-10 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 inline-block text-transparent bg-clip-text ainmate-[gradient_3s_ease-in-out_infinite] bg-[length:200%_auto]">Trading Card Game</h1>
                     </div>
-
                     <div className="flex gap-4">
+                        {/* Sidebar */}
                         <div>
                             <h1 className="font-bold text-2xl">Categories</h1>
+                            {
+                                seriesQuery && (
+                                    <Link to='/cards' className="text-sm font-medium text-[#EA3323] flex border-2 rounded-2xl items-center my-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg>
+                                        Clear Category
+                                    </Link>
+                                )
+                            }
                             <ul>
                                 {series &&
                                     Object.entries(series).map(([seriesName]) => (
@@ -103,7 +112,7 @@ export default function Cards() {
                                 ) : (
                                     <div>This series doesn't have card</div>
                                 )
-}
+                                }
                             </ul>
                         </div>
                     </div>
