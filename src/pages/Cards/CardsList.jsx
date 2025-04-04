@@ -10,8 +10,8 @@ export default function CardsList({ cards, loading }) {
                 cards.map(card => (
                     <Link to={`/cards/${card.id}`} key={card.id} >
                         <li className={`bg-white rounded-xl shadow-lg hover:shadow-xl ${loadingStyles}`}>
-                            <div className="relative aspect-[3/4]">
-                                <img src={card.images.small} alt={card.name} className="absolute inset-0 w-full h-full object-contain" />
+                            <div className="">
+                                <img src={card.images.small} alt={card.name} className=" w-full h-full object-contain" />
                             </div>
 
                             {/* Card Info */}
