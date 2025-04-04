@@ -6,6 +6,7 @@ import Root from './routes/root'
 import ErrorPage from './pages/ErrorPage'
 import Home from './pages/Home'
 import Cards from './pages/Cards'
+import SingleCard from './pages/SingleCard'
 
 const routes = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const routes = createBrowserRouter([
       {
         path: 'cards/series/:seriesQuery',
         element: <Cards />
+      },
+      {
+        path: `cards/:cardId`,
+        element: <SingleCard />
       }
     ]
   }

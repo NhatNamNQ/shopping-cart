@@ -16,7 +16,6 @@ export default function Cards() {
         const fetchData = async () => {
             try {
                 const [cardsData, setsData] = await Promise.all([getCards(), getSets()]);
-                console.log(seriesQuery)
 
                 const filteredCardsBySeries = seriesQuery
                     ? cardsData.filter((card) => card.set.series === seriesQuery)
