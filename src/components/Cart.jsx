@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function Cart({ onClose, cards, onDelete }) {
+export function Cart({ onClose, cards, onDelete, onAdjust }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -45,13 +45,27 @@ export function Cart({ onClose, cards, onDelete }) {
                 <div className="flex flex-col gap-4 mt-4">
                     <ul className="list-none">
                         {cards.map((card) => (
-                            <li key={card.id} className="flex items-center gap-4 p-2 border-b">
+                            <li key={card.id} className="flex items-center gap-4 p-2">
                                 <img src={card.images.large} alt={card.name} className="w-30 h-full object-contain flex-shrink-0 p-2 rounded-xl" />
                                 <div className="flex flex-col overflow-hidden gap-2 flex-1">
                                     <p className="font-bold text-2xl truncate">{card.name} - {card.set.name}</p>
                                     <p className="font-medium">{card.cardmarket.prices.averageSellPrice}</p>
-                                    <p>Quantity: {card.quantity}</p>
-                                    <button className="mb-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300 cursor-pointer"
+                                    <div className="flex gap-4 items-center">
+                                        <button
+                                            onClick={() => onAdjust(card.id, card.quantity, "decrement")}
+                                            className="cursor-pointer font-bold text-2xl"
+                                        >-
+                                        </button>
+                                        <span className="font-bold text-xl">{card.quantity}</span>
+                                        <button
+                                            onClick={() => onAdjust(card.id, card.quantity, "increment")}
+                                            className="cursor-pointer font-bold text-2xl"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <button
+                                        className="mb-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300 cursor-pointer w-[25%] flex justify-center"
                                         onClick={() => onDelete(card.id)}
                                     >
                                         Remove

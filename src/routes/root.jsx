@@ -30,12 +30,31 @@ function Root() {
     }
   }
 
+  function handleAdjustCardQuantity(id, quantity, action) {
+    if (quantity === 1 && action === "decrement") {
+      removeItemFromCart(id);
+      return;
+    }
+
+    const updatedData = cartData.map((card) => {
+      if (card.id === id) card.quantity += action === 'increment' ? 1 : -1;
+      return card;
+    })
+
+    setCartData(updatedData);
+  }
+
   const removeItemFromCart = (id) =>
     setCartData(cartData.filter((item) => item.id !== id));
 
   return (
     <CartContext.Provider value={handleAddItemToCart}>
-      {isCartActive && <Cart onClose={toggleIsCartActive} cards={cartData} onDelete={removeItemFromCart}/>}
+      {isCartActive &&
+        <Cart
+          onClose={toggleIsCartActive}
+          cards={cartData}
+          onDelete={removeItemFromCart}
+          onAdjust={handleAdjustCardQuantity} />}
       <Header onOpenCart={toggleIsCartActive} />
       <Outlet />
     </CartContext.Provider>
