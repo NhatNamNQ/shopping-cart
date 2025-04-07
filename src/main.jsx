@@ -7,6 +7,7 @@ import ErrorPage from './pages/ErrorPage'
 import Home from './pages/Home'
 import Cards from './pages/Cards'
 import SingleCard from './pages/SingleCard'
+import { CartProvider } from './context/CartContext'
 
 const routes = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home/>
+        element: <Home />
 
       },
       {
@@ -37,6 +38,8 @@ const routes = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={routes} />
+    <CartProvider>
+      <RouterProvider router={routes} />
+    </CartProvider>
   </StrictMode>,
 )
