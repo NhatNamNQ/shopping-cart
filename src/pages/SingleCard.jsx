@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom"
 import { getCard } from "../api";
+import { CartContext } from "../routes/root";
 
 export default function SingleCard() {
     const { cardId } = useParams();
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const onAddToCart = useContext(CartContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,7 +46,9 @@ export default function SingleCard() {
                         <p className="text-lg">Series: {data.set.series}</p>
                         <p className="text-lg">Rarity: {data.rarity}</p>
                     </div>
-                    <button className="mt-4 mb-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+                    <button
+                        className="mt-4 mb-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
+                        onClick={() => onAddToCart(data)}>
                         Add to Card
                     </button>
                 </div>

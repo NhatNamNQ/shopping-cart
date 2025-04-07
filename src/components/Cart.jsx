@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function Cart({ onClose }) {
+export function Cart({ onClose, cards, onDelete }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -29,8 +29,8 @@ export function Cart({ onClose }) {
 
     return (
         <>
-            <div className={`z-10 fixed right-0 bg-slate-100 w-full h-full max-w-xl py-16 px-20 ${transitionClasses} ${classes.cart}`}>
-                <div className="flex items-center justify-center gap-6 py-4">
+            <div className={`z-10 fixed right-0 bg-slate-100 w-full h-full max-w-xl overflow-y-auto py-10 px-10 ${transitionClasses} ${classes.cart}`}>
+                <div className="flex items-center justify-between gap-6 py-4">
                     <span className="font-bold text-4xl">Shopping bag</span>
                     <span className="cursor-pointer" onClick={handleCloseTransition}>
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +41,32 @@ export function Cart({ onClose }) {
                             <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                         </svg>
                     </span>
+                </div>
+                <div className="flex flex-col gap-4 mt-4">
+                    <ul className="list-none">
+                        {cards.map((card) => (
+                            <li key={card.id} className="flex items-center gap-4 p-2 border-b">
+                                <img src={card.images.large} alt={card.name} className="w-30 h-full object-contain flex-shrink-0 p-2 rounded-xl" />
+                                <div className="flex flex-col overflow-hidden gap-2 flex-1">
+                                    <p className="font-bold text-2xl truncate">{card.name} - {card.set.name}</p>
+                                    <p className="font-medium">{card.cardmarket.prices.averageSellPrice}</p>
+                                    <p>Quantity: {card.quantity}</p>
+                                    <button className="mb-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300 cursor-pointer"
+                                        onClick={() => onDelete(card.id)}
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="font-bold text-xl">
+                    <span>Subtotal: $</span>
+                    {cards.reduce((total, currentCard) => {
+                        total += currentCard.quantity * currentCard.cardmarket.prices.averageSellPrice;
+                        return total;
+                    }, 0)}
                 </div>
             </div>
             <div

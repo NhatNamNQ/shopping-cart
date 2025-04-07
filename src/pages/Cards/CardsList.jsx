@@ -11,7 +11,7 @@ export default function CardsList({ cards, loading }) {
                     <Link to={`/cards/${card.id}`} key={card.id} >
                         <li className={`bg-white rounded-xl shadow-lg hover:shadow-xl ${loadingStyles}`}>
                             <div className="">
-                                <img src={card.images.small} alt={card.name} className=" w-full h-full object-contain" />
+                                <img src={card.images.large} alt={card.name} className=" w-full h-full object-contain" />
                             </div>
 
                             {/* Card Info */}
