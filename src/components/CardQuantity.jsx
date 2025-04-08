@@ -2,7 +2,7 @@ export default function CardQuantity({ quantity, onDecrement, onIncrement }) {
     return (
         <div className="flex gap-4 items-center">
             <button
-                onClick={onIncrement}
+                onClick={onDecrement}
                 className="cursor-pointer stroke-slate-600 bg-slate-200 w-6 h-6 rounded-sm flex justify-center items-center p-1"
             >
                 <svg
@@ -21,7 +21,7 @@ export default function CardQuantity({ quantity, onDecrement, onIncrement }) {
             </button>
             <span className="">{quantity}</span>
             <button
-                onClick={onDecrement}
+                onClick={onIncrement}
                 className="cursor-pointer stroke-slate-600 bg-slate-200 w-6 h-6 rounded-sm flex justify-center items-center p-1"
             >
                 <svg

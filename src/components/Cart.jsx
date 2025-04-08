@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import pikachuImage from "../assets/pikachuCartoon.png";
+import { useCart } from "../context/CartContext";
+import CardQuantity from "./CardQuantity";
 
-export function Cart({ onClose, cards, onDelete, onAdjust }) {
+export function Cart() {
     const [isVisible, setIsVisible] = useState(false);
+    const {
+        cartItems,
+        removeItemFromCart,
+        handleAdjustCardQuantity,
+        toggleIsCartActive,
+    } = useCart();
 
     useEffect(() => {
         setTimeout(() => {
@@ -20,7 +28,7 @@ export function Cart({ onClose, cards, onDelete, onAdjust }) {
         classes.cart = "translate-x-full"
     }
 
-    const subTotal = cards.reduce((total, currentCard) => {
+    const subTotal = cartItems.reduce((total, currentCard) => {
         total += currentCard.quantity * currentCard.cardmarket.prices.averageSellPrice;
         return total;
     }, 0).toFixed(2);
@@ -29,7 +37,7 @@ export function Cart({ onClose, cards, onDelete, onAdjust }) {
     function handleCloseTransition() {
         setIsVisible(false);
         setTimeout(() => {
-            onClose()
+            toggleIsCartActive();
         }, TRANSITION_DURATION);
     }
 
@@ -56,7 +64,7 @@ export function Cart({ onClose, cards, onDelete, onAdjust }) {
                 {/* Shopping cart items list section */}
                 <section className="mb-4">
                     <ul className="list-none flex flex-col gap-4">
-                        {cards.map((card) => (
+                        {cartItems.map((card) => (
                             <li key={card.id} className="flex gap-6">
                                 <img src={card.images.large} alt={card.name} className="w-30 h-full object-contain flex-shrink-0" />
                                 <div className="flex flex-col overflow-hidden gap-2 flex-1">
@@ -67,7 +75,7 @@ export function Cart({ onClose, cards, onDelete, onAdjust }) {
                                             viewBox="0 -960 960 960"
                                             width="24px" fill="#000000"
                                             className="cursor-pointer hover:fill-red-600"
-                                            onClick={() => onDelete(card.id)}
+                                            onClick={() => removeItemFromCart(card.id)}
                                         >
                                             <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                                         </svg>
@@ -83,45 +91,11 @@ export function Cart({ onClose, cards, onDelete, onAdjust }) {
 
                                     <div className="flex items-end text-xl justify-between flex-1">
                                         <p className="font-medium">${card.cardmarket.prices.averageSellPrice}</p>
-                                        <div className="flex gap-4 items-center">
-                                            <button
-                                                onClick={() => onAdjust(card.id, card.quantity, "decrement")}
-                                                className="cursor-pointer stroke-slate-600 bg-slate-200 w-6 h-6 rounded-sm flex justify-center items-center p-1"
-                                            >
-                                                <svg
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth={2}
-                                                    stroke="currentColor"
-                                                    className="w-5 h-5"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M19.5 12h-15"
-                                                    />
-                                                </svg>
-                                            </button>
-                                            <span className="">{card.quantity}</span>
-                                            <button
-                                                onClick={() => onAdjust(card.id, card.quantity, "increment")}
-                                                className="cursor-pointer stroke-slate-600 bg-slate-200 w-6 h-6 rounded-sm flex justify-center items-center p-1"
-                                            >
-                                                <svg
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth={2}
-                                                    stroke="currentColor"
-                                                    className="w-5 h-5"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M12 4.5v15m7.5-7.5h-15"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
+                                        <CardQuantity
+                                            quantity={card.quantity}
+                                            onIncrement={() => handleAdjustCardQuantity(card.id, card.quantity, "increment")}
+                                            onDecrement={() => handleAdjustCardQuantity(card.id, card.quantity, "decrement")}
+                                        />
                                     </div>
                                 </div>
                             </li>
