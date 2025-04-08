@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom"
+import logoImage from "../assets/logo.svg"
 
 export function Header({onOpenCart}) {
     return (
         <header className="border-b border-gray-200">
             <div className="container flex items-center max-w-screen justify-between p-4">
                 <div>
-                    <img src="logo.svg" alt="logo" width={50} />
+                    <img src={logoImage} alt="logo" width={50} />
                 </div>
                 <ul className="flex gap-x-16 font-medium item-center">
                     <NavLink to="/">Home</NavLink>
